@@ -1,1 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+  <meta charset="utf-8">
+  <title>Favorite Animals</title>
+  <style type="text/css">
+    button,
+    div,
+    form,
+    input {
+      margin: 10px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="container">
+    <h1>Animal Search</h1>
+<!-- Animals will get dumped here -->
+    <div id="buttons-view"></div>
+
+    <form id="animal-form">
+      <label for="animal-input">Add an animal!</label>
+      <input type="text" id="movie-input"><br>
+
+      <!-- Button triggers new movie to be added -->
+      <input id="add-movie" type="submit" value="Add a Movie, Yo!">
+  
+    </form>
+    <div id="movie-view"></div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script type="text/javascript">
+      // Initial array of animals
+      var animals = ["monkey", "lion", "tiger", "giraffe" , "dog" , "cat"];
+
+      function makeButton(str){
+        return `<button class="animal">${str}</button>`
+        }
+
+      // Function for displaying animal data
+      function renderButtons() {
+
+        
+
+        $('#buttons-view').html(animals.map(makeButton))
+
+        // CODE GOES HERE
+
+      }
+
+      // This function handles events where one button is clicked
+      $("#add-animal").on("click", function() {
+        event.preventDefault();
+        var animal = $(`#animal-input`).val()
+        movies.push(movie);
+        renderButtons();
+
+        // CODE GOES HERE
+        
+       
+
+      });
+
+      $(document).on('click' , '.movie' , function () {
+          
+          var movie = $(this).text();
+          var queryURL  = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
+          $.ajax({
+            url: queryURL,
+            method: "GET"
+          }).then(function (movie) {
+            console.log(movie);
+            $('#movie-view').html(`
+            <h1>${movie.Title}</h1>
+            `)
+          });
+        });
+
+      $(document).on('click', '.movie' , function(){
+        console.log($(this).text());
+      });
+
+      // Calling the renderButtons function to display the initial list of movies
+      renderButtons();
+    </script>
+  </div>
+</body>
+
+</html>
