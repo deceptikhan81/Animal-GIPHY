@@ -54,7 +54,7 @@
       $("#add-animal").on("click", function() {
         event.preventDefault();
         var animal = $(`#animal-input`).val()
-        movies.push(movie);
+        animal.push(movie);
         renderButtons();
 
         // CODE GOES HERE
@@ -63,14 +63,14 @@
 
       });
 
-      $(document).on('click' , '.movie' , function () {
+      $(document).on('click' , '.animal' , function () {
           
           var movie = $(this).text();
           var queryURL  = "https://www.omdbapi.com/?t=" + movie + "&y=&plot=short&apikey=trilogy";
           $.ajax({
             url: queryURL,
             method: "GET"
-          }).then(function (movie) {
+          }).then(function (animal) {
             console.log(movie);
             $('#movie-view').html(`
             <h1>${movie.Title}</h1>
